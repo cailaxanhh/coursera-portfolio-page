@@ -22,9 +22,18 @@ const LandingSection = () => {
   const { onOpen } = useAlertContext();
 
   const formik = useFormik({
-    initialValues: {},
-    onSubmit: (values) => {},
-    validationSchema: Yup.object({}),
+    initialValues: {
+      firstName: "",
+      email: "",
+      type: "",
+      comment: "",
+    },
+    onSubmit: (values) => {useSubmit},
+    validationSchema: Yup.object().shape({
+      firstName:Yup.string().min(2,"Too short!").max(50, "Too long!").required("Required"),
+      lastName: Yup.string().min(2, "Too short!").max(50, "Too long!").required("Required"),
+      email: Yup.string().email("Invalid email").required("Required"),
+    }),
   });
 
   return (
